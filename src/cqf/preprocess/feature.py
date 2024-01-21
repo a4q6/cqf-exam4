@@ -10,8 +10,6 @@ def calc_ohlcv_features(ohlc: pd.DataFrame) -> pd.DataFrame:
         .rename(f"OC_{ticker}")
         .to_frame()
         .join(((ohlc.high - ohlc.low) / ohlc.open).rename(f"HL_{ticker}"))
-        # .join(((ohlc.close - ohlc.low) / ohlc.open).abs().rename(f"LC_{ticker}"))
-        # .join(((ohlc.close - ohlc.high) / ohlc.open).abs().rename(f"HC_{ticker}"))
         .join(
             (
                 (ohlc.high - np.maximum(ohlc.open, ohlc.close)).abs()
